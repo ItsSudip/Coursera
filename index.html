@@ -10,59 +10,96 @@
 </html>-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      rudderanalytics = window.rudderanalytics = [];
+      var methods = [
+        "load",
+        "page",
+        "track",
+        "identify",
+        "alias",
+        "group",
+        "ready",
+        "reset",
+        "getAnonymousId",
+        "setAnonymousId",
+      ];
+      for (var i = 0; i < methods.length; i++) {
+        var method = methods[i];
+        rudderanalytics[method] = (function (methodName) {
+          return function () {
+            rudderanalytics.push(
+              [methodName].concat(Array.prototype.slice.call(arguments))
+            );
+          };
+        })(method);
+      }
+      function load() {
+        rudderanalytics.load(
+          "1rh6nh7zYttLntgK5zEMFiJROqQ",
+          "https://hosted-dev-dataplane.dev-rudder.rudderlabs.com",
+          {
+            configUrl: "https://api.dev.rudderlabs.com",
+            // configUrl: "http://localhost:5000/",
+            logLevel: "DEBUG",
+          }
+        );
+      }
+    </script>
+    <!-- <script src="https://cdn.rudderlabs.com/v1/rudder-analytics.min.js"></script> -->
+    <script src="https://cdn.rudderlabs.com/v1/rudder-analytics-staging.min.js"></script>
     <title>form</title>
-</head>
-<body>
-        <h2>FORM</h2>
-        <form action="backend.php">
-            
-            <div>
-                <label for="Name">  Name</label>
-                <input type="text" name="myName" id ="Name">
-            </div>
-            <br>
-            
-            <div>
-                <label for="Role">Role</label>
-               <input type="text" name="myRole" id = "Role">
-            </div>
-            <br>
-            
-            <div>
-                <label for="Email">Email</label>
-            <input type="email" name="myEmail" id ="Email">
-            </div>
-            <br>
-            <div>
-                <label for="Profession">Profession</label>
-                <select name="myprof" id="Profession">
-                    <option value="stu">Student</option>            
-                    <option value="emp">Employee</option>            
-                </select>        
-            </div>
-            <br>
-            
-            <div>
-                <label for="date">Date</label>
-                <input type="date" name="mydate" id="date">
-            </div>
-            <br>
-            <div>
-                <label for="Gender">Gender : </label>
-                    <select name="Gen" id="Gender">
-                        <option value="Male">Male</option>
-                        <option value="fM">Female</option>
-                        <option value="fM1">Others</option>
-                    </select>
-            </div>
-            <br>
-            <div>
-                <input type="submit" value="submit">
-            </div>
-        </form>
-    
-</body>
+  </head>
+  <body>
+    <button onclick="load()">Load</button>
+    <h2>FORM</h2>
+    <form action="backend.php">
+      <div>
+        <label for="Name"> Name</label>
+        <input type="text" name="myName" id="Name" />
+      </div>
+      <br />
+
+      <div>
+        <label for="Role">Role</label>
+        <input type="text" name="myRole" id="Role" />
+      </div>
+      <br />
+
+      <div>
+        <label for="Email">Email</label>
+        <input type="email" name="myEmail" id="Email" />
+      </div>
+      <br />
+      <div>
+        <label for="Profession">Profession</label>
+        <select name="myprof" id="Profession">
+          <option value="stu">Student</option>
+          <option value="emp">Employee</option>
+        </select>
+      </div>
+      <br />
+
+      <div>
+        <label for="date">Date</label>
+        <input type="date" name="mydate" id="date" />
+      </div>
+      <br />
+      <div>
+        <label for="Gender">Gender : </label>
+        <select name="Gen" id="Gender">
+          <option value="Male">Male</option>
+          <option value="fM">Female</option>
+          <option value="fM1">Others</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <input type="submit" value="submit" />
+      </div>
+    </form>
+  </body>
 </html>
