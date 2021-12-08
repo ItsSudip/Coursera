@@ -13,11 +13,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
-    <title>formabc</title>
-=======
     <title>form4</title>
->>>>>>> ce1dca7fbc0b65b728ae82fcbd7fdca574fdf71c
+    <script>
+      rudderanalytics = window.rudderanalytics = [];
+      var methods = [
+        "load",
+        "page",
+        "track",
+        "identify",
+        "alias",
+        "group",
+        "ready",
+        "reset",
+        "getAnonymousId",
+        "setAnonymousId",
+      ];
+      for (var i = 0; i < methods.length; i++) {
+        var method = methods[i];
+        rudderanalytics[method] = (function (methodName) {
+          return function () {
+            rudderanalytics.push(
+              [methodName].concat(Array.prototype.slice.call(arguments))
+            );
+          };
+        })(method);
+      }
+      
+        rudderanalytics.load(
+          "1rh6nh7zYttLntgK5zEMFiJROqQ",
+          "https://hosted-dev-dataplane.dev-rudder.rudderlabs.com",
+          {
+            configUrl: "https://api.dev.rudderlabs.com",
+            // configUrl: "http://localhost:5000/",
+            logLevel: "DEBUG",
+          }
+        );
+      
+    </script>
+    <!-- <script src="https://cdn.rudderlabs.com/v1/rudder-analytics.min.js"></script> -->
+    <script src="https://cdn.rudderlabs.com/v1/rudder-analytics-staging.min.js"></script>
+    <title>form</title>
+  </head>
+  <body>
+    
+    <title>form</title>
   </head>
   <body>
     <h2>FORM</h2>
@@ -58,7 +97,6 @@
         <select name="Gen" id="Gender">
           <option value="Male">Male</option>
           <option value="fM">Female</option>
-          <option value="fM2">Others</option>
         </select>
       </div>
       <br />
