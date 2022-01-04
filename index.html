@@ -61,7 +61,7 @@
     function alias1() {
       ldclient.alias(user2, user);
     }
-    function track1() { ldclient.track("testEvent"); }
+    function track1() { ldclient.track("testEvent",{"foo":"bar"}); }
     function bulktrack(){
         for(var i=0;i<50;i++)
             ldclient.track("Test Event");
