@@ -12,109 +12,76 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>form4</title>
-  <!--    <script>
-      rudderanalytics = window.rudderanalytics = [];
-      var methods = [
-        "load",
-        "page",
-        "track",
-        "identify",
-        "alias",
-        "group",
-        "ready",
-        "reset",
-        "getAnonymousId",
-        "setAnonymousId",
-      ];
-      for (var i = 0; i < methods.length; i++) {
-        var method = methods[i];
-        rudderanalytics[method] = (function (methodName) {
-          return function () {
-            rudderanalytics.push(
-              [methodName].concat(Array.prototype.slice.call(arguments))
-            );
-          };
-        })(method);
-      }
-      
-        rudderanalytics.load(
-          "1rh6nh7zYttLntgK5zEMFiJROqQ",
-          "https://hosted-dev-dataplane.dev-rudder.rudderlabs.com",
-          {
-            configUrl: "https://api.dev.rudderlabs.com",
-            // configUrl: "http://localhost:5000/",
-            logLevel: "DEBUG",
-          }
-        );
-      
-    </script>-->
-  <!-- <script src="https://cdn.rudderlabs.com/v1/rudder-analytics.min.js"></script> -->
-  <!--<script src="https://cdn.rudderlabs.com/v1/rudder-analytics-staging.min.js"></script>-->
-  <title>form</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+  <title>LaunchDarkly tutorial</title>
+ <!-- Use LaunchDarkly sdk -->
+  <script src="https://unpkg.com/launchdarkly-js-client-sdk@2"></script>
+  <!-- <script src="./node_modules/launchdarkly-js-client-sdk/dist/ldclient.min.js"></script>-->
 </head>
 
 <body>
 
-  <title>form</title>
-  </head>
+  <textarea name="NewFeature" id="NewFeature" cols="30" rows="10"></textarea>
+  <script>
+    // Set up the user properties. This user should appear on your LaunchDarkly users dashboard
+    // soon after you run the demo.
+    var user = {
+      name: 'Test User6',
+      key: 'alias00006',
+      country: 'India',
+      email: "sanitynwebUser6@testmail.com",
+      firstName: "Amal ",
+      lastName: "Chowdhury",
+      avatar: "batMan",
+      custom: { foo: "bar" },
+      ip: "10.11.32.123",
+      privateAttributeNames: ["name", "avatar"],
+      secondary: "abcdefgh",
+      anonymous: false
+    };
 
-  <body>
-    <h2>FORM</h2>
-    <form action="backend.php">
-      <div>
-        <label for="Name"> Name</label>
-        <input type="text" name="myName" id="Name" />
-      </div>
-      <br />
+    var user2 = {
+      name: 'Test User7',
+      key: 'user00005',
+      country: 'India',
+      email: "sanitynwebUser7@testmail.com",
+      firstName: "Bimal",
+      lastName: "Chowdhury",
+    }
 
-      <div>
-        <label for="Role">Role Number</label>
-        <input type="text" name="myRole" id="Role" />
-      </div>
-      <br />
+    // var div = document.createElement('div');
+    // document.body.appendChild(div);
 
-      <div>
-        <label for="Email">Email</label>
-        <input type="email" name="myEmail" id="Email" />
-      </div>
-      <br />
-      <div>
-        <label for="Profession">Profession</label>
-        <select name="myprof" id="Profession">
-          <option value="stu">Student</option>
-          <option value="emp">Employee</option>
-          <option value="oth">Other</option>
-          <option value="selfemp">Self Employed</option>
-        </select>
-      </div>
-      <br />
+    // div.appendChild(document.createTextNode('Initializing...'));
 
-      <div>
-        <label for="date">Date</label>
-        <input type="date" name="mydate" id="date" />
-      </div>
-      <br />
-      <div>
-        <label for="Gender">Gender : </label>
-        <select name="Gen" id="Gender">
-          <option value="Male">Male</option>
-          <option value="fM">Female</option>
-          <option value="oth">Other</option>
-        </select>
-      </div>
-      <br />
-      <div>
-        <input type="submit" value="submit" />
-      </div>
-      <div>
-        <p>Adding a paragraph through local</p>
-        <p>Adding a paragraph</p>
-      </div>
+    // Create a new LDClient instance with your environment-specific SDK key
+    var ldclient = LDClient.initialize('61c2f670b45e5314bf8ff9d9', user);
+    ldclient.identify(user);
+    function alias1() {
+      ldclient.alias(user2, user);
+    }
+    function track1() { ldclient.track("testEvent"); }
+    function bulktrack(){
+        for(var i=0;i<50;i++)
+            ldclient.track("Test Event");
+    }
+    function render() {
+      var flagValue = ldclient.variation('new-feature', false);
+      // var label = (flagValue ? 'Showing' : 'Not showing') + ' your feature to ' + user.key;
+      if (!flagValue) {
+        document.getElementById("NewFeature").style.display = "none";
+      }
+      else
+        document.getElementById("NewFeature").style.display = "block";
+      console.log("SDK successfully connected! The value of new-feature is " + flagValue + " for " + user.key)
+      // div.replaceChild(document.createTextNode(label), div.firstChild);
+    }
+    ldclient.on('ready', render);
+    ldclient.on('change', render);
+  </script>
+  <button onclick="alias1()">Alias</button>
+  <button onclick="track1()">Track</button>
+</body>
 
-    </form>
-  </body>
-
-</html>
+</html> 
