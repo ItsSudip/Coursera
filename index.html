@@ -64,7 +64,7 @@
     function track1() { ldclient.track("testEvent",{"foo":"bar"}); }
     function bulktrack(){
         for(var i=0;i<50;i++)
-            ldclient.track("Test Event");
+            ldclient.track("Test Event",{"foo":"bar","foo1":"bar1"});
     }
     function render() {
       var flagValue = ldclient.variation('new-feature', false);
