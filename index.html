@@ -14,72 +14,22 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
-  <title>LaunchDarkly tutorial</title>
- <!-- Use LaunchDarkly sdk -->
-  <script src="https://unpkg.com/launchdarkly-js-client-sdk@2"></script>
-  <!-- <script src="./node_modules/launchdarkly-js-client-sdk/dist/ldclient.min.js"></script>-->
+  <title>Google Tag Manager</title>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5FDR64P');</script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>
-
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FDR64P"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
   <textarea name="NewFeature" id="NewFeature" cols="30" rows="10"></textarea>
-  <script>
-    // Set up the user properties. This user should appear on your LaunchDarkly users dashboard
-    // soon after you run the demo.
-    var user = {
-      name: 'Test User6',
-      key: 'alias00006',
-      country: 'India',
-      email: "sanitynwebUser6@testmail.com",
-      firstName: "Amal ",
-      lastName: "Chowdhury",
-      avatar: "batMan",
-      custom: { foo: "bar" },
-      ip: "10.11.32.123",
-      privateAttributeNames: ["name", "avatar"],
-      secondary: "abcdefgh",
-      anonymous: false
-    };
-
-    var user2 = {
-      name: 'Test User7',
-      key: 'user00005',
-      country: 'India',
-      email: "sanitynwebUser7@testmail.com",
-      firstName: "Bimal",
-      lastName: "Chowdhury",
-    }
-
-    // var div = document.createElement('div');
-    // document.body.appendChild(div);
-
-    // div.appendChild(document.createTextNode('Initializing...'));
-
-    // Create a new LDClient instance with your environment-specific SDK key
-    var ldclient = LDClient.initialize('61c2f670b45e5314bf8ff9d9', user);
-    ldclient.identify(user);
-    function alias1() {
-      ldclient.alias(user2, user);
-    }
-    function track1() { ldclient.track("testEvent",{"foo":"bar"}); }
-    function bulktrack(){
-        for(var i=0;i<50;i++)
-            ldclient.track("Test Event",{"foo":"bar","foo1":"bar1"});
-    }
-    function render() {
-      var flagValue = ldclient.variation('new-feature', false);
-      // var label = (flagValue ? 'Showing' : 'Not showing') + ' your feature to ' + user.key;
-      if (!flagValue) {
-        document.getElementById("NewFeature").style.display = "none";
-      }
-      else
-        document.getElementById("NewFeature").style.display = "block";
-      console.log("SDK successfully connected! The value of new-feature is " + flagValue + " for " + user.key)
-      // div.replaceChild(document.createTextNode(label), div.firstChild);
-    }
-    ldclient.on('ready', render);
-    ldclient.on('change', render);
-  </script>
   <button onclick="alias1()">Alias</button>
   <button onclick="track1()">Track</button>
   <button onclick="bulktrack()">Bulk Track</button>
