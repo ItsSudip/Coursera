@@ -11,9 +11,6 @@ jobs:
   create-branch:
     name: Create New Hotfix Branch
     runs-on: ubuntu-latest
-
-    # Only allow these users to create new hotfix branch from 'main'
-    if: github.ref == 'refs/heads/main' && (github.actor == 'vinayteki95' || github.actor == 'ItsSudip' || github.actor == 'krishna2020' || github.actor == 'koladilip' || github.actor == 'saikumarrs' || github.actor == 'anantjain45823' || github.actor == 'chandumlg' || github.actor == 'mihir-4116' || github.actor == 'utsabc') && (github.triggering_actor == 'ItsSudip' || github.triggering_actor == 'krishna2020' ||  github.triggering_actor == 'saikumarrs' || github.triggering_actor == 'koladilip' || github.triggering_actor == 'anantjain45823' || github.triggering_actor == 'chandumlg' || github.triggering_actor == 'mihir-4116' || github.triggering_actor == 'utsabc' || github.triggering_actor == 'vinayteki95')
     steps:
       - name: Create Branch
         uses: peterjgrainger/action-create-branch@v2.4.0
