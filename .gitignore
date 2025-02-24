@@ -1,0 +1,13 @@
+node_modules
+/build
+.idea
+coverage
+.DS_Store
+local.yml
+yarn-error.log
+.env
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+reports
